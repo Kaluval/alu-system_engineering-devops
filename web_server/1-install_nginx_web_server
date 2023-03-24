@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Install nginx
+apt-get update
+apt-get install -y nginx
+
+# Configure nginx to listen on port 80
+sed -i "s|listen\s*80;|listen 80 default_server;|" /etc/nginx/sites-available/default
+
+# Restart nginx
+service nginx restart
+
+# Create a custom HTML page with the string "Holberton School"
+echo "Holberton School for the win!" > /var/www/html/index.html
+
+# Check if the page contains the string "Holberton School"
+curl -s http://localhost | grep "Holberton School"
