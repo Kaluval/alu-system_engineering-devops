@@ -5,16 +5,18 @@
 apt-get update
 apt-get install -y nginx
 
+echo "301 moved permanently" > /usr/share/nginx/html/custom_301.html
 mkdir /etc/nginx/html
 touch /etc/nginx/html/index.html
 echo "Holberton School" > /etc/nginx/html/index.html
+
 printf %s "server {
     listen 80;
     listen [::]:80 default_server;
-    root   /etc/nginx/html;
-    index  index.html index.htm;
+    root   /usr/share/nginx/html/;
+    error_page 301 /custom_301.html;
     location /redirect_me {
-        return 301 http://cuberule.com/;
+        return 301 /usr/share/nginx/html/custom_301.html;
     }
 }" > /etc/nginx/sites-available/default
 
