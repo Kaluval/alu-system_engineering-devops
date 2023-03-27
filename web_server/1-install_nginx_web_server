@@ -13,12 +13,12 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # Set Nginx to listen on port 80
-# sudo sed -i 's/listen\s*80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
+sudo sed -i 's/listen\s*80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
 
 # Create a HTML file containing "Holberton School"
-# echo "Holberton School" | sudo tee /var/www/html/index.html
-echo "Holberton School" > /var/www/html/index.html
+echo "Holberton School" | sudo tee /var/www/html/index.html
+# echo "Holberton School" > /var/www/html/index.html
 
 # Configure Nginx to serve the HTML file as the default page
-# sudo sed -i '/index/s/index.html/index.html index.htm/g' /etc/nginx/sites-available/default
+sudo sed -i '/index/s/index.html/index.html index.htm/g' /etc/nginx/sites-available/default
 sudo service nginx restart
