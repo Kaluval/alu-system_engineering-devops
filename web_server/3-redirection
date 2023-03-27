@@ -1,29 +1,21 @@
 #!/usr/bin/env bash
-# Update package lists and upgrade system packages
-sudo apt-get update
-sudo apt-get upgrade -y
+# Configures an Nginx server so that /redirect_me redirects to another page.
+# The redirection is configured as a "301 Moved Permanently"
 
-# Install Nginx web server
-sudo apt-get install nginx -y
-# Creating “301 Moved Permanently”
-echo '301 Moved Permanently' > /usr/share/nginx/html/custom_301.html
+apt-get update
+apt-get install -y nginx
 
-NGINX_CONF_FILE="/etc/nginx/nginx.conf"
-ERROR_PAGE="/usr/share/nginx/html/301.html"
+mkdir /etc/nginx/html
+touch /etc/nginx/html/index.html
+echo "Holberton School" > /etc/nginx/html/index.html
+printf %s "server {
+    listen 80;
+    listen [::]:80 default_server;
+    root   /etc/nginx/html;
+    index  index.html index.htm;
+    location /redirect_me {
+        return 301 http://cuberule.com/;
+    }
+}" > /etc/nginx/sites-available/default
 
-# Backup the original configuration file
-cp "$NGINX_CONF_FILE" "$NGINX_CONF_FILE.bak"
-
-# Add the custom error page configuration to the NGINX configuration file
-sed -i "/^http {/a \
-  error_page 301 $ERROR_PAGE;" "$NGINX_CONF_FILE"
-
-# Verify the NGINX configuration file syntax
-nginx -t
-
-
-# Set Nginx to listen on port 80
-sudo sed -i 's/listen\s*80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
-
-# Restart NGINX service
-sudo service nginx restart
+service nginx restart
