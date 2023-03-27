@@ -14,4 +14,4 @@ echo "Holberton School" | sudo tee /var/www/html/index.html
 
 # Configure Nginx to serve the HTML file as the default page
 sudo sed -i '/index/s/index.html/index.html index.htm/g' /etc/nginx/sites-available/default
-sudo systemctl restart nginx
+sudo service restart nginx
