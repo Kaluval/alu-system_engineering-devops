@@ -8,7 +8,7 @@ sudo apt-get install nginx -y
 
 # change permissions for editing nginx folder
 if [ "$EUID" -ne 0 ]
-  then sudo chown -R $USER:$USER /var/www
+  then sudo chown -R "$USER":$USER /var/www
   exit
 fi
 
