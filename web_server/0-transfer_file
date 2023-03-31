@@ -1,12 +1,23 @@
 #!/usr/bin/env bash
-# Transfer a file from a client to a server
+
+# Check if all 4 parameters are passed
 if [[ $# -lt 4 ]]; then
   echo "Usage: $0 PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
-  exit
+  exit 1
 fi
 
-path_to_file="$1"
-ip="$2"
-username="$3"
-path_to_ssh_key="$4"
-scp -i "$path_to_ssh_key" -o StrictHostKeyChecking=No "$path_to_file" "$username@$ip":~/
+# Assign variables to the parameters
+file_path=$1
+server_ip=$2
+username=$3
+ssh_key_path=$4
+
+# Transfer the file to the user home directory on the server
+scp -o StrictHostKeyChecking=no -i "$ssh_key_path" "$file_path" "$username@$server_ip:~/"
+
+# Check if the file was successfully transferred
+if [[ $? -eq 0 ]]; then
+  echo "File transfer successful"
+else
+  echo "File transfer failed"
+fi
