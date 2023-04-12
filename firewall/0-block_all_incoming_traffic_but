@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Enable UFW (Uncomplicated Firewall)
+sudo ufw enable
+
+# Allow incoming SSH traffic
+sudo ufw allow 22
+
+# Allow other incoming traffic as needed (e.g., HTTP, HTTPS)
+# sudo ufw allow 80    # Uncomment this line to allow incoming HTTP traffic
+# sudo ufw allow 443   # Uncomment this line to allow incoming HTTPS traffic
+
+# Enable UFW logging (optional)
+# sudo ufw logging on
+
+# Display UFW status
+sudo ufw status
