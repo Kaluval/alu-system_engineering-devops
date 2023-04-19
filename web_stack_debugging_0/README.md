@@ -1,0 +1,4 @@
+Docker
+Docker is a platform that simplifies the process of creating, deploying, and running applications by using containers. Containers are lightweight and efficient virtualization solutions that allow running an application in a sandbox environment on top of a host operating system. This method of virtualization provides more flexibility than virtual machines, as it enables applications to run consistently in any environment, from the developer's laptop to production environments.
+
+Docker achieves this through the use of images, which contain everything that an application needs to run, including code, dependencies, runtime, system tools, and libraries. Docker images are built using Dockerfiles, which are text files that describe the steps necessary to build the image. Once an image is built, it can be run as a container on any Docker host, allowing for portability and reproducibility.
